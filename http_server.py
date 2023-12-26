@@ -1,9 +1,10 @@
 import time
 from http.server import SimpleHTTPRequestHandler, HTTPServer
+from urllib.parse import urlparse
 
 class SlowHandler(SimpleHTTPRequestHandler):
     def do_GET(self):
-        if self.path == "/slow.js":
+        if urlparse(self.path).path == "/slow.js":
             time.sleep(1)
 
             self.send_response(200)
